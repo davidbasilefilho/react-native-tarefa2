@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, Button, View, Image } from "react-native";
+import { StyleSheet, Button, Text, View, Image, Pressable } from "react-native";
+import { Brand, BrandButton } from "./src/components/BrandButton";
 
 export default function App(): JSX.Element {
     const [image, setImage] = useState(require("./assets/apple.png"));
@@ -21,21 +22,52 @@ export default function App(): JSX.Element {
         setImage(require("./assets/ruffles.png"));
     };
 
+    const brands: Brand[] = [
+        {
+            id: crypto.randomUUID(),
+            title: "Apple",
+            switchFunc: () => {
+                setImage(require("./assets/apple.png"));
+            },
+        },
+        {
+            id: crypto.randomUUID(),
+            title: "Ruffles",
+            switchFunc: () => {
+                setImage(require("./assets/ruffles.png"));
+            },
+        },
+        {
+            id: crypto.randomUUID(),
+            title: "Avon",
+            switchFunc: () => {
+                setImage(require("./assets/avon.png"));
+            },
+        },
+        {
+            id: crypto.randomUUID(),
+            title: "Fandangos",
+            switchFunc: () => {
+                setImage(require("./assets/fandangos.png"));
+            },
+        },
+    ];
+
     return (
         <View style={styles.main}>
             <View style={styles.imageContainer}>
-                <Image
-                    source={image}
-                    style={{ width: "15rem", height: "15rem", margin: "auto" }}
-                ></Image>
+                <Image source={image} style={styles.image}></Image>
             </View>
 
             <View style={styles.buttonContainer}>
-                <Button title="Apple" onPress={trocarApple} />
-                <Button title="Avon" onPress={trocarAvon} />
-                <Button title="Fandangos" onPress={trocarFandangos} />
-                <Button title="Ruffles" onPress={trocarRuffles} />
-                <StatusBar style="auto" />
+                {brands.map((brand) => (
+                    <BrandButton
+                        brand={brand}
+                        buttonStyle={styles.button}
+                        textStyle={styles.buttonText}
+                        key={brand.id}
+                    />
+                ))}
             </View>
         </View>
     );
@@ -64,8 +96,24 @@ const styles = StyleSheet.create({
 
     imageContainer: {
         flex: 2,
-        alignitems: "center",
+        alignItems: "center",
         justifyContent: "center",
-        width: "85%",
+        width: "100%",
+    },
+
+    image: {
+        width: 192,
+        height: 192,
+        margin: "auto",
+    },
+
+    button: {
+        padding: 8,
+        borderRadius: 6,
+        backgroundColor: "#1e66f5",
+    },
+
+    buttonText: {
+        color: "#eff1f5",
     },
 });
