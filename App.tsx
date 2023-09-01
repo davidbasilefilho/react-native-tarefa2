@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, Button, Text, View, Image, Pressable } from "react-native";
 import { Brand, BrandButton } from "./src/components/BrandButton";
+import Crypto from "expo-crypto";
 
 export default function App(): JSX.Element {
     const [image, setImage] = useState(require("./assets/apple.png"));
@@ -24,28 +25,28 @@ export default function App(): JSX.Element {
 
     const brands: Brand[] = [
         {
-            id: crypto.randomUUID(),
+            id: Crypto.randomUUID(),
             title: "Apple",
             switchFunc: () => {
                 setImage(require("./assets/apple.png"));
             },
         },
         {
-            id: crypto.randomUUID(),
+            id: Crypto.randomUUID(),
             title: "Ruffles",
             switchFunc: () => {
                 setImage(require("./assets/ruffles.png"));
             },
         },
         {
-            id: crypto.randomUUID(),
+            id: Crypto.randomUUID(),
             title: "Avon",
             switchFunc: () => {
                 setImage(require("./assets/avon.png"));
             },
         },
         {
-            id: crypto.randomUUID(),
+            id: Crypto.randomUUID(),
             title: "Fandangos",
             switchFunc: () => {
                 setImage(require("./assets/fandangos.png"));
